@@ -19,7 +19,7 @@ function createContent(text) {
   const content = document.createElement("p");
   content.classList.add("todo");
   content.textContent = "👉 " + text;
-  content.addEventListener("click", toggleItemComplete);
+  content.setAttribute("contenteditable", true);
   return content;
 }
 
@@ -30,10 +30,13 @@ function createDeleteButton() {
   return deleteButton;
 }
 
-function addItemToList() {
-  const textbox = document.querySelector("input[type=text]");
+function addItemToList(event) {
+  const pressedEnterKey = event.type === "keypress" && event.key === "Enter";
+  const clickedAddButton = event.type === "click";
+  const wantedEvents = pressedEnterKey || clickedAddButton;
+  const textbox = document.querySelector(".textbox");
 
-  if (!textbox.value) {
+  if (!textbox.value || !wantedEvents) {
     return;
   }
 
@@ -56,3 +59,6 @@ function addItemToList() {
 
 const addButton = document.querySelector("button");
 addButton.addEventListener("click", addItemToList);
+
+const textbox = document.querySelector(".textbox");
+textbox.addEventListener("keypress", addItemToList);
