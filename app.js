@@ -1,6 +1,10 @@
 function createTodoListItem() {
   const input = document.querySelector("input[type=text]");
 
+  if (input.value === "") {
+    return;
+  }
+
   const li = document.createElement("li");
   li.textContent = input.value;
 
