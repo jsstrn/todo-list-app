@@ -3,6 +3,10 @@ body {
   background-color: whitesmoke;
 }
 
+p {
+  display: inline;
+}
+
 .todo {
   text-decoration: none;
 }
